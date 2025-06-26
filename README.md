@@ -97,11 +97,6 @@ Address.idの内容を記録しておくことで、後出し変更のトラブ�
 | quantity    | int  | 商品の数             |
 | is_canceled | bool | キャンセルされたかどうか     |
 
-### Fluctuation
-TODO: 
-- クーポンによる値下げ、突発的な値上げに対する修正
-- Transaction、TransactElementのどっちに紐つくかを決める
-
 # アプリ画面
 このアプリを構成する画面の一覧の存在と内容を定義しておく。
 
