@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Open Store
 
-## Getting Started
+オープンなECサイト開発プロジェクト
 
-First, run the development server:
+## 目次
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [データベース設計](docs/database.md) - テーブル定義とデータモデル
+- [画面設計](docs/screens.md) - アプリ画面の仕様と構成
+- [セキュリティ仕様](docs/security.md) - 認証・セキュリティ設計
+- [設計思想](docs/design-philosophy.md) - プロジェクトの設計コンセプト
+- [開発計画](docs/development-plan.md) - マイルストーンと実装計画
+
+## 開発方針
+
+- **段階的開発**: BUY権限（購入者）機能から実装開始
+- **モック優先**: SELL・ADMIN権限機能は将来実装
+- **PC前提**: レスポンシブデザインは後回し
+
+## 技術スタック
+
+- **フレームワーク**: Next.js
+- **認証**: Auth.js (NextAuth) + マジックリンク
+- **データベース**: (未定)
+- **スタイリング**: (未定)
+
+## プロジェクト構成
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+open-store/
+├── docs/           # プロジェクト仕様書
+│   ├── database.md           # テーブル定義
+│   ├── screens.md            # 画面設計
+│   ├── security.md           # セキュリティ仕様
+│   ├── design-philosophy.md  # 設計思想
+│   └── development-plan.md   # 開発計画・マイルストーン
+├── CLAUDE.md       # Claude Code向け開発支援情報
+└── README.md       # プロジェクト概要（このファイル）
+```
