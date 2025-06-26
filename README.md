@@ -33,28 +33,31 @@
 **権限:**
 ユーザーには単なるエンドユーザーから販売者、そして管理者というroleが存在する。
 
-| name       | type | 説明                              |
-| ---------- | ---- | ------------------------------- |
-| id         | uuid | ユーザーの識別子                        |
-| created_at | time | 作成日                             |
-| name       | text | 名前                              |
-| address    | text | 住所                              |
-| phone      | text | 電話番号                            |
-| email      | text | メールアドレス（認証用・一意制約）               |
-| role       | enum | 買い手・売り手・管理者の区別 （BUY,SELL,ADMIN） |
+| name       | type | 説明                                              |
+| ---------- | ---- | ----------------------------------------------- |
+| id         | uuid | ユーザーの識別子                                        |
+| created_at | time | 作成日                                             |
+| name       | text | 名前                                              |
+| address_id | uuid | デフォルトとして指定する住所ID。初住所登録時にはAddressテーブルにも情報が追記される。 |
+| email      | text | メールアドレス（認証用・一意制約）                               |
+| role       | enum | 買い手・売り手・管理者の区別 （BUY,SELL,ADMIN）                 |
 
-### 配送先住所: ShippingAddrs
-テーブルにあるメインのアドレス以外に登録しておきたいアドレスを保存しておく。
+### 住所: Address
+住所の詳細についてはUserテーブルからこちらに分離する。
 
-| name        | type | 説明            |     |
-| ----------- | ---- | ------------- | --- |
-| id          | uuid | アドレス識別子       |     |
-| created_at  | time | 作成日           |     |
-| user_id     | uuid | このアドレスの保有者識別子 |     |
-| name        | text | 登録先住所につける名前   |     |
-| phone       | text | 登録先住所の電話番号    |     |
-| address     | text | 住所            |     |
-| is_archived | bool | 無効化されたか       |     |
+User初作成時の挙動:
+- デフォルト指定されたアドレスのnameは蛇足になるため読み込まれないようにする。初登録時に自動設定されるnameは空文字にする。
+- 作成日はUser=Addressとなるようにしておく。
+
+| name        | type | 説明            |
+| ----------- | ---- | ------------- |
+| id          | uuid | アドレス識別子       |
+| created_at  | time | 作成日           |
+| user_id     | uuid | このアドレスの保有者識別子 |
+| name        | text | 登録先住所につける名前   |
+| phone       | text | 登録先住所の電話番号    |
+| address     | text | 住所            |
+| is_archived | bool | 無効化されたか       |
 
 ## 取引: Transaction
 配送先の住所は後でトラブルにならないように、ここでも保存して冗長性を持たせる。
