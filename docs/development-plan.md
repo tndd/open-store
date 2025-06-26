@@ -103,7 +103,8 @@
 ## 技術的メモ
 
 ### データベース制約の注意点
-- User-Address同時作成時はトランザクション必須
+- 初回購入時：住所作成 → User.address_id更新の順次処理
+- Address初登録時のaddress_id登録漏れに注意すること
 - Item.product_id（商品概念）とItem.id（バージョン）の使い分け
 - TransactElementはItem.id（特定バージョン）を参照
 

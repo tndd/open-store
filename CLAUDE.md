@@ -29,10 +29,10 @@ ECサイト「Open Store」の開発プロジェクト。段階的開発によ�
    - `Item.id`: 特定バージョンのID（TransactElementはこちらを参照）
    - 商品は編集不可、変更時は新バージョン作成
 
-2. **User-Address循環参照問題**:
-   - User.address_id ⇔ Address.user_id の循環参照
-   - 新規ユーザー作成時は必ずトランザクション内で同時作成すること
-   - User.address_idはNULL許容（初回作成時の対応）
+2. **User-Address段階的登録**:
+   - 新規ユーザー作成時：メールのみでUser作成、address_id=NULL
+   - 初回購入時：住所入力 → Address作成 → User.address_id更新の順次処理
+   - Address初登録時のaddress_id登録漏れに注意すること
 
 3. **取引データの不変性**:
    - Transaction/TransactElementは原則削除・編集禁止
