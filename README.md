@@ -25,19 +25,25 @@
 ## ユーザー: User
 こっちはバージョン管理する必要はない。
 
-**認証方式:** Auth.js（NextAuth）のマジックリンク認証を使用
+**認証方式:** 
+Auth.js（NextAuth）のマジックリンク認証を使用
+
 - パスワード不要（メール認証のみ）
 - セキュリティリスクが低い
 - ユーザビリティが高い
 
-| name       | type | 説明                |
-| ---------- | ---- | ----------------- |
-| id         | uuid | ユーザーの識別子          |
-| created_at | time | 作成日               |
-| name       | text | 名前                |
-| address    | text | 住所                |
-| phone      | text | 電話番号              |
-| email      | text | メールアドレス（認証用・一意制約） |
+**権限:**
+ユーザーにも、単なるエンドユーザーから販売者、そして管理者というふうなroleが存在する。
+
+| name       | type | 説明                              |
+| ---------- | ---- | ------------------------------- |
+| id         | uuid | ユーザーの識別子                        |
+| created_at | time | 作成日                             |
+| name       | text | 名前                              |
+| address    | text | 住所                              |
+| phone      | text | 電話番号                            |
+| email      | text | メールアドレス（認証用・一意制約）               |
+| role       | enum | 買い手・売り手・管理者の区別 （BUY,SELL,ADMIN） |
 
 ### サブアドレス: SubAddresses
 テーブルにあるメインのアドレス以外に登録しておきたいアドレスを保存しておく。
@@ -47,11 +53,10 @@
 | id          | uuid | アドレス識別子       |
 | created_at  | time | 作成日           |
 | user_id     | uuid | このアドレスの保有者識別子 |
+| name        | text | 住所につける名前      |
 | address     | text | 住所            |
 | is_archived | bool | 無効化されたか       |
 
-### 属性: UserAttribute
-TODO: 販売者、会員ランクなど
 
 ## 取引: Transaction
 配送先の住所は後でトラブルにならないように、ここでも保存して冗長性を持たせる。
