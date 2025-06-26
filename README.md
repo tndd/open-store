@@ -37,14 +37,14 @@
 - ユーザーが実際に商品を購入する際、初めてここに値が入力されることになる
 - **Address初登録時のaddress_id登録漏れに注意すること**
 
-| name       | type         | 説明                              |
-| ---------- | ------------ | ------------------------------- |
-| id         | uuid         | ユーザーの識別子                        |
-| created_at | time         | 作成日                             |
-| name       | text         | 名前                              |
-| address_id | uuid \| NULL | デフォルトとして指定する住所ID。               |
-| email      | text         | メールアドレス（認証用・一意制約）               |
-| role       | enum         | 買い手・売り手・管理者の区別 （BUY,SELL,ADMIN） |
+| name       | type  | 説明                                 |
+| ---------- | ----- | ---------------------------------- |
+| id         | uuid  | ユーザーの識別子                           |
+| created_at | time  | 作成日                                |
+| name       | text  | 名前                                 |
+| address_id | uuid? | デフォルトとして指定する住所ID。初作成時の状態を考慮しNULL許容 |
+| email      | text  | メールアドレス（認証用・一意制約）                  |
+| role       | enum  | 買い手・売り手・管理者の区別 （BUY,SELL,ADMIN）    |
 
 ### 住所: Address
 住所の詳細についてはUserテーブルからこちらに分離する。
