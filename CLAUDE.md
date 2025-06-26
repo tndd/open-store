@@ -9,6 +9,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm start` - ビルド済みアプリの起動
 - `npm run lint` - ESLintによるコードチェック
 
+### Docker & データベース
+- `npm run docker:up` - PostgreSQLコンテナ起動
+- `npm run docker:down` - PostgreSQLコンテナ停止
+- `npm run db:migrate` - マイグレーション実行
+- `npm run db:generate` - Prismaクライアント生成
+- `npm run db:seed` - ダミーデータ投入
+- `npm run db:reset` - データベースリセット
+
+### 開発環境起動手順
+1. `npm run docker:up` - データベース起動
+2. `npm run db:migrate` - マイグレーション（初回のみ）
+3. `npm run db:seed` - ダミーデータ投入（初回のみ）
+4. `npm run dev` - 開発サーバー起動
+
 ## プロジェクト概要
 
 ECサイト「Open Store」の開発プロジェクト。段階的開発により、まずBUY権限（購入者）機能のみを実装し、SELL・ADMIN権限は将来実装とする。

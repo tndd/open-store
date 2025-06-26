@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ユーザー
+model User {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now()) @map("created_at")
+  name       String
+  addressId  String?  @unique @map("address_id")
+  email      String   @unique
+  role       Role     @default(BUY)
+
+  // リレーション
+  defaultAddress Address? @relation("UserDefaultAddress", fields: [addressId], references: [id])
+  addresses      Address[] @relation("UserAddresses")
+  items          Item[]    @relation("UserItems")
+  buyerTransactions  Transaction[] @relation("BuyerTransactions")
+  sellerTransactions Transaction[] @relation("SellerTransactions")
+
+  @@map("users")
+}
+
+// 住所
+model Address {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now()) @map("created_at")
+  userId      String   @map("user_id")
+  name        String
+  phone       String
+  address     String
+  isArchived  Boolean  @default(false) @map("is_archived")
+
+  // リレーション
+  user         User    @relation("UserAddresses", fields: [userId], references: [id])
+  userDefault  User?   @relation("UserDefaultAddress")
+  transactions Transaction[]
+
+  @@map("addresses")
+}
+
+// 商品
+model Item {
+  id        String   @id @default(cuid())
+  productId String   @map("product_id")
+  userId    String   @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  name      String
+  price     Int
+  exp       DateTime
+  body      String
+  images    String[]
+
+  // リレーション
+  user      User     @relation("UserItems", fields: [userId], references: [id])
+  transactElements TransactElement[]
+
+  @@map("items")
+}
+
+// 取引
+model Transaction {
+  id          String   @id @default(cuid())
+  timestamp   DateTime @default(now())
+  buyerId     String   @map("buyer_id")
+  sellerId    String   @map("seller_id")
+  destAddrId  String   @map("dest_addr_id")
+
+  // リレーション
+  buyer       User     @relation("BuyerTransactions", fields: [buyerId], references: [id])
+  seller      User     @relation("SellerTransactions", fields: [sellerId], references: [id])
+  destAddr    Address  @relation(fields: [destAddrId], references: [id])
+  elements    TransactElement[]
+
+  @@map("transactions")
+}
+
+// 取引の要素
+model TransactElement {
+  id          String   @id @default(cuid())
+  transactId  String   @map("transact_id")
+  itemId      String   @map("item_id")
+  quantity    Int
+  isCanceled  Boolean  @default(false) @map("is_canceled")
+
+  // リレーション
+  transaction Transaction @relation(fields: [transactId], references: [id])
+  item        Item        @relation(fields: [itemId], references: [id])
+
+  @@map("transact_elements")
+}
+
+// 権限
+enum Role {
+  BUY
+  SELL
+  ADMIN
+}
