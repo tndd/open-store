@@ -25,15 +25,19 @@
 ## ユーザー: User
 こっちはバージョン管理する必要はない。
 
-| name       | type | 説明       |
-| ---------- | ---- | -------- |
-| id         | uuid | ユーザーの識別子 |
-| created_at | time | 作成日      |
-| name       | text | 名前       |
-| address    | text | 住所       |
-| phone      | text | 電話番号     |
-| email      | text | メールアドレス  |
-| password   | text | パスワード    |
+**認証方式:** Auth.js（NextAuth）のマジックリンク認証を使用
+- パスワード不要（メール認証のみ）
+- セキュリティリスクが低い
+- ユーザビリティが高い
+
+| name       | type | 説明                |
+| ---------- | ---- | ----------------- |
+| id         | uuid | ユーザーの識別子          |
+| created_at | time | 作成日               |
+| name       | text | 名前                |
+| address    | text | 住所                |
+| phone      | text | 電話番号              |
+| email      | text | メールアドレス（認証用・一意制約） |
 
 ### サブアドレス: SubAddresses
 テーブルにあるメインのアドレス以外に登録しておきたいアドレスを保存しておく。
@@ -108,3 +112,20 @@ UIについて:
 
 ## 決済
 商品、発送先、合計金額、発送日時の指定を行う確認画面。
+
+# セキュリティ仕様
+認証システムには、**Auth.js（NextAuth）+ マジックリンク認証**を使用する。
+
+## 技術仕様
+- **認証プロバイダー**: Auth.js EmailProvider
+- **セッション管理**: JWT（JSON Web Token）
+- **メール送信**: SendGrid / Resend / Amazon SES等
+- **セッション有効期限**: 90日間
+- **マジックリンク有効期限**: 15分間
+
+## セキュリティ対策
+- **HTTPS必須**: 本番環境では必ずHTTPS通信
+- **CORS設定**: 許可されたドメインからのみAPI呼び出し可能
+- **CSP設定**: Content Security Policyでスクリプト実行を制限
+- **Rate Limiting**: メール送信の頻度制限
+- **メール検証**: 一意制約により重複登録を防止
