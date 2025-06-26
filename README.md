@@ -175,9 +175,10 @@ TODO
 ### 売上統計画面
 
 # セキュリティ仕様
+## ログイン認証
 認証システムには、**Auth.js（NextAuth）+ マジックリンク認証**を使用する。
 
-## 技術仕様
+**技術仕様:**
 - **認証プロバイダー**: Auth.js EmailProvider
 - **セッション管理**: JWT（JSON Web Token）
 - **メール送信**: SendGrid / Resend / Amazon SES等
