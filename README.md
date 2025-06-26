@@ -8,6 +8,7 @@
 - [画面設計](docs/screens.md) - アプリ画面の仕様と構成
 - [セキュリティ仕様](docs/security.md) - 認証・セキュリティ設計
 - [設計思想](docs/design-philosophy.md) - プロジェクトの設計コンセプト
+- [開発計画](docs/development-plan.md) - マイルストーンと実装計画
 
 ## 開発方針
 
@@ -27,9 +28,11 @@
 ```
 open-store/
 ├── docs/           # プロジェクト仕様書
-│   ├── database.md      # テーブル定義
-│   ├── screens.md       # 画面設計
-│   ├── security.md      # セキュリティ仕様
-│   └── design-philosophy.md  # 設計思想
+│   ├── database.md           # テーブル定義
+│   ├── screens.md            # 画面設計
+│   ├── security.md           # セキュリティ仕様
+│   ├── design-philosophy.md  # 設計思想
+│   └── development-plan.md   # 開発計画・マイルストーン
+├── CLAUDE.md       # Claude Code向け開発支援情報
 └── README.md       # プロジェクト概要（このファイル）
 ```
