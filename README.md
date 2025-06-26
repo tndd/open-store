@@ -43,7 +43,7 @@
 | email      | text | メールアドレス（認証用・一意制約）               |
 | role       | enum | 買い手・売り手・管理者の区別 （BUY,SELL,ADMIN） |
 
-### サブアドレス: SubAddrs
+### 配送先住所: ShippingAddrs
 テーブルにあるメインのアドレス以外に登録しておきたいアドレスを保存しておく。
 
 | name        | type | 説明            |     |
