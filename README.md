@@ -22,7 +22,7 @@
 | price      | int  | 価格                      |
 | exp        | time | 商品の消費期限                 |
 | body       | text | 説明文を含む文章                |
-| image      | png  | 商品の画像                   |
+| image      | text | 商品の画像ファイルへのパス           |
 
 ## ユーザー: User
 こっちはバージョン管理する必要はない。
