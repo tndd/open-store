@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# テーブル定義
+テーブルは種類によってはupdateを許してはならないという点に注意。
+注文履歴の存在のため、内容を改竄することはできない。
 
-## Getting Started
+## 商品: Item
+作成された商品は、内容編集を行うことはできない。
+内容に変更を加えたならば、別バージョンの商品として扱う。
 
-First, run the development server:
+| name       | type | 説明                    |
+| ---------- | ---- | --------------------- |
+| id         | uuid | 商品の作成日ごとの状態を特定するためのもの |
+| item_id    | uuid | 商品自体のID               |
+| user_id    | uuid | 誰の商品かを表す              |
+| created_at | time | 作成日                   |
+| name       | text | 商品名                   |
+| price      | int  | 価格                    |
+| body       | text | 説明文を含む文章              |
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ユーザー: User
+こっちはバージョン管理する必要はない。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| name       | type | 説明       |
+| ---------- | ---- | -------- |
+| id         | uuid | ユーザーの識別子 |
+| created_at | time | 作成日      |
+| name       | text | 名前       |
+| address    | text | 住所       |
+| phone      | text | 電話番号     |
+| email      | text | メールアドレス  |
+| password   | text | パスワード    |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### サブアドレス: SubAddresses
+テーブルにあるメインのアドレス以外に登録しておきたいアドレスを保存しておく。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| name        | type | 説明            |
+| ----------- | ---- | ------------- |
+| id          | uuid | アドレス識別子       |
+| created_at  | time | 作成日           |
+| user_id     | uuid | このアドレスの保有者識別子 |
+| address     | text | 住所            |
+| is_archived | bool | 無効化されたか       |
 
-## Learn More
+### 属性: UserAttribute
+TODO: 販売者、会員ランクなど
 
-To learn more about Next.js, take a look at the following resources:
+## 取引: Transaction
+配送先の住所は後でトラブルにならないように、ここでも保存して冗長性を持たせる。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| name        | type | 説明     |
+| ----------- | ---- | ------ |
+| id          | uuid | 取引の識別子 |
+| timestamp   | time | 取引成立時刻 |
+| buyer_id    | uuid | 買い手    |
+| seller_id   | uuid | 売り手    |
+| destination | text | 配送先の住所 |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 取引の要素: TransactElement
+買い物かごの中のそれぞれの要素というイメージ。
 
-## Deploy on Vercel
+| name        | type | 説明               |
+| ----------- | ---- | ---------------- |
+| id          | uuid | 取引セットにおける1取引の識別子 |
+| transact_id | uuid | 取引セットの識別子        |
+| item_id     | uuid | 対象の商品            |
+| quantity    | int  | 商品の数             |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Fluctuation
+TODO: 
+- クーポンによる値下げ、突発的な値上げに対する修正
+- Transaction、TransactElementのどっちに紐つくかを決める
