@@ -61,12 +61,12 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isExpiringSoon = daysLeft <= 3 && daysLeft > 0
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 group">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group">
       {/* 商品画像 */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50">
-        <div className="aspect-square bg-gray-100 flex items-center justify-center">
+      <div className="relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-700 dark:to-gray-600">
+        <div className="aspect-square bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
           {/* ダミー画像の代わりに商品に応じた絵文字 */}
-          <div className="w-full h-full bg-gradient-to-br from-green-100 to-emerald-200 flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-br from-green-100 to-emerald-200 dark:from-gray-600 dark:to-gray-500 flex items-center justify-center">
             <div className="text-6xl opacity-80">
               {getProductEmoji(product.name)}
             </div>
@@ -90,31 +90,31 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* 商品情報 */}
       <div className="p-4">
         {/* 商品名 */}
-        <h3 className="font-bold text-gray-900 text-lg mb-2 group-hover:text-green-700 transition-colors">
+        <h3 className="font-bold text-gray-900 dark:text-gray-100 text-lg mb-2 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">
           {product.name}
         </h3>
 
         {/* 価格 */}
         <div className="flex items-baseline space-x-1 mb-3">
-          <span className="text-2xl font-bold text-green-600">
+          <span className="text-2xl font-bold text-green-600 dark:text-green-400">
             {formatPrice(product.price)}
           </span>
-          <span className="text-sm text-gray-500">/ 個</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">/ 個</span>
         </div>
 
         {/* 説明文 */}
-        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 line-clamp-2">
           {product.body}
         </p>
 
         {/* メタ情報 */}
         <div className="space-y-2 mb-4">
-          <div className="flex items-center text-sm text-gray-500">
+          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
             <Calendar className="h-4 w-4 mr-2" />
             <span>消費期限: {formatDate(product.exp)}</span>
           </div>
           {product.user && (
-            <div className="flex items-center text-sm text-gray-500">
+            <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
               <MapPin className="h-4 w-4 mr-2" />
               <span>生産者: {product.user.name}</span>
             </div>
@@ -122,7 +122,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* アクションボタン */}
-        <button className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200 active:scale-[0.98] transform">
+        <button className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200 active:scale-[0.98] transform">
           カートに追加
         </button>
       </div>
