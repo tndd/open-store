@@ -2,7 +2,6 @@ import { Sparkles, Truck, Shield, Heart } from 'lucide-react'
 import ProductCard from './components/ProductCard'
 import { prisma } from '@/lib/prisma'
 
-export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   // 商品データを取得
