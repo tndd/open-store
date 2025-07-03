@@ -5,6 +5,13 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('シードデータの作成を開始します...')
 
+  // 既存データをチェック
+  const existingUsers = await prisma.user.count()
+  if (existingUsers > 0) {
+    console.log('既存のシードデータが見つかりました。スキップします。')
+    return
+  }
+
   // ユーザーの作成
   const user1 = await prisma.user.create({
     data: {
