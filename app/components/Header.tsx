@@ -2,9 +2,12 @@
 
 import { ShoppingCart, Search, User, Leaf, Sun, Moon } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
+import { useCart } from '../contexts/CartContext'
+import Link from 'next/link'
 
 export default function Header() {
   const { theme, toggleTheme, mounted } = useTheme()
+  const { totalItems } = useCart()
 
   // hydration完了まで待機
   if (!mounted) {
@@ -35,13 +38,17 @@ export default function Header() {
                 <User className="h-5 w-5" />
                 <span className="hidden sm:block">ログイン</span>
               </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors relative">
-                <ShoppingCart className="h-5 w-5" />
-                <span className="hidden sm:block">カート</span>
-                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
-              </button>
+              <Link href="/cart">
+                <button className="flex items-center space-x-1 text-gray-700 hover:text-green-600 transition-colors relative">
+                  <ShoppingCart className="h-5 w-5" />
+                  <span className="hidden sm:block">カート</span>
+                  {totalItems > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  )}
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -94,13 +101,17 @@ export default function Header() {
               <User className="h-5 w-5" />
               <span className="hidden sm:block">ログイン</span>
             </button>
-            <button className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors relative">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="hidden sm:block">カート</span>
-              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
-              </span>
-            </button>
+            <Link href="/cart">
+              <button className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors relative">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="hidden sm:block">カート</span>
+                {totalItems > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+            </Link>
           </div>
         </div>
       </div>

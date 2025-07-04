@@ -1,6 +1,6 @@
-import { Sparkles, Truck, Shield, Heart } from 'lucide-react'
-import ProductCard from './components/ProductCard'
 import { prisma } from '@/lib/prisma'
+import { Heart, Shield, Sparkles, Truck } from 'lucide-react'
+import ProductCard from './components/ProductCard'
 
 export default async function Home() {
   // 商品データを取得

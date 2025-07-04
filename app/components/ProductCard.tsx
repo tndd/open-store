@@ -1,4 +1,5 @@
 import { Calendar, MapPin, Star } from 'lucide-react'
+import Link from 'next/link'
 
 interface Product {
   id: string
@@ -61,7 +62,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isExpiringSoon = daysLeft <= 3 && daysLeft > 0
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group">
+    <Link href={`/products/${product.id}`}>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 group cursor-pointer">
       {/* 商品画像 */}
       <div className="relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-700 dark:to-gray-600">
         <div className="aspect-square bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
@@ -127,5 +129,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         </button>
       </div>
     </div>
+    </Link>
   )
 }
