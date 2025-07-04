@@ -1,4 +1,5 @@
 import { Leaf, Heart, MapPin, Mail, Phone } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Footer() {
   return (
@@ -7,12 +8,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* ブランド情報 */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-green-600 p-2 rounded-lg">
-                <Leaf className="h-6 w-6 text-white" />
+            <Link href="/">
+              <div className="flex items-center space-x-2 mb-4 cursor-pointer hover:opacity-80 transition-opacity w-fit">
+                <div className="bg-green-600 p-2 rounded-lg">
+                  <Leaf className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-green-800 dark:text-green-400">Open Store</h3>
               </div>
-              <h3 className="text-xl font-bold text-green-800 dark:text-green-400">Open Store</h3>
-            </div>
+            </Link>
             <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
               農家直送の新鮮な野菜・果物をお届けします。<br />
               自然の恵みを大切に、安心・安全な食材を全国にお届けしています。
