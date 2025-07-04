@@ -15,13 +15,15 @@ export default function Header() {
       <header className="bg-white shadow-sm border-b border-green-100 sticky top-0 z-50 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
-              <div className="bg-green-600 p-2 rounded-lg">
-                <Leaf className="h-6 w-6 text-white" />
+            <Link href="/">
+              <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity">
+                <div className="bg-green-600 p-2 rounded-lg">
+                  <Leaf className="h-6 w-6 text-white" />
+                </div>
+                <h1 className="text-2xl font-bold text-green-800">Open Store</h1>
+                <span className="text-sm text-green-600 font-medium">自然の恵み</span>
               </div>
-              <h1 className="text-2xl font-bold text-green-800">Open Store</h1>
-              <span className="text-sm text-green-600 font-medium">自然の恵み</span>
-            </div>
+            </Link>
             <div className="flex-1 max-w-2xl mx-8">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -61,13 +63,15 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* ロゴ */}
-          <div className="flex items-center space-x-2">
-            <div className="bg-green-600 p-2 rounded-lg">
-              <Leaf className="h-6 w-6 text-white" />
+          <Link href="/">
+            <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity">
+              <div className="bg-green-600 p-2 rounded-lg">
+                <Leaf className="h-6 w-6 text-white" />
+              </div>
+              <h1 className="text-2xl font-bold text-green-800 dark:text-green-400">Open Store</h1>
+              <span className="text-sm text-green-600 dark:text-green-400 font-medium">自然の恵み</span>
             </div>
-            <h1 className="text-2xl font-bold text-green-800 dark:text-green-400">Open Store</h1>
-            <span className="text-sm text-green-600 dark:text-green-400 font-medium">自然の恵み</span>
-          </div>
+          </Link>
 
           {/* 検索バー */}
           <div className="flex-1 max-w-2xl mx-8">
